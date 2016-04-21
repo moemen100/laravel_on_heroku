@@ -27,7 +27,7 @@ Welcome
         	<input class="form-control" type="password" name="password" id="password" placeholder="Enter Password"  >
         	</div>
         	<button type="submit" class="btn btn-primary">Sign in</button>
-        	   <input type="hidden" name="_token" value="{{Session::token()}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
         	</form>
         </div>
         
@@ -74,7 +74,7 @@ Welcome
         	<input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" value="{{ Request::old('password') }}">
         	</div>
         	<button type="submit" class="btn btn-primary">Sign up</button>
-        	<input type="hidden" name="_token" value="{{Session::token()}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
         	</form>
         </div>
         </div>
