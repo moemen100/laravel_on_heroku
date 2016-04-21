@@ -4,9 +4,9 @@ namespace App;
 use Illuminate\Contracts\Auth\authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class user extends Model implements authenticatable
+class user extends Model
 {
-    use \ Illuminate\Auth\authenticatable;
+    //use \ Illuminate\Auth\authenticatable;
 
     /**
      * Get the name of the unique identifier for the user.
