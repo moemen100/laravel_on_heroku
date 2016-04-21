@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-use Illuminate\Contracts\Auth\authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth;
 
 class user extends Model  implements authenticatable
 {
