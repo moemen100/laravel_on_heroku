@@ -2,7 +2,7 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth;
+use Illuminate\Contracts\Auth\authenticatable;
 
 class user extends Model  implements authenticatable
 {
