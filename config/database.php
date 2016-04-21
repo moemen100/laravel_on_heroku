@@ -1,10 +1,5 @@
 <?php
-$url = parse_url(getenv("postgres://tloebtofnjvuik:jHU1siprxyABPsYgNWWxOd4aBk@ec2-107-22-250-17.compute-1.amazonaws.com:5432/d3utda0ddq0js7"));
 
-$host = $url["ec2-107-22-250-17.compute-1.amazonaws.com"];
-$username = $url["tloebtofnjvuik"];
-$password = $url["jHU1siprxyABPsYgNWWxOd4aBk"];
-$database = substr($url["d3utda0ddq0js7"], 1);
 return [
 
     /*
@@ -31,7 +26,7 @@ return [
     |
     */
 
-    'default' => 'pgsql',
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -71,16 +66,20 @@ return [
             'engine' => null,
         ],
 
-        'pgsql' => array(
-            'driver'   => 'pgsql',
-            'host'     => $host,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
+        'pgsql' => [
+           'driver'   => 'pgsql',
+            //'host'     => parse_url(getenv("DB_HOST"))["host"],
+            //'database' => substr(parse_url(getenv("DB_HOST"))["path"], 1),
+            //'username' => parse_url(getenv("DB_HOST"))["user"],
+           // 'password' => parse_url(getenv("DB_HOST"))["pass"],
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'localhost'),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
-        ),
+        ],
 
     ],
 
