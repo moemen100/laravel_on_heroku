@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\Storage;
 */
 class usercontroller extends Controller
 {
-	public function getdashboard()
-	{
-return view('dashboard');
-	}
+	
 	public function postSignUp(Request $request)
 	{
 		$this->validate($request, [
@@ -35,12 +32,18 @@ Auth::login($user);
 return redirect()->route('dashboard');
 	}
 	public function postSignIn(Request $request)
-	{$this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+	{
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required'
+		]);
 		if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]))
-			{return redirect()->route('dashboard');}
+		{return redirect()->route('dashboard');}
 		return redirect()->back();
+	}
+	public function postSignOut()
+	{
+		Auth::logout();
+		return redirect()->route("home");
 	}
 }

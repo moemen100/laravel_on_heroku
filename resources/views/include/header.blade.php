@@ -1,5 +1,5 @@
 <header>
-   <nav class="navbar navbar-inverse">
+   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -14,7 +14,14 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-  </div><!-- /.container-fluid -->
+      <p class="navbar-text navbar-right">
+@if(Auth::user())
+
+Signed in as <a href="#" class=breadcrumb"> {{Auth::user()->first_name}}</a>
+          <a  href="{{route('signout')}}"  class= "breadcrumb">Sign out</a>
+<a href="#" class= "breadcrumb">Acount</a>
+@endif
+      </p>
+</div><!-- /.container-fluid -->
 </nav>
-    </header>
+</header>

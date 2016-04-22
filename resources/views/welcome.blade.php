@@ -8,7 +8,9 @@ Welcome
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+               {{ $error }}
             @endforeach
         </ul>
     </div>
@@ -44,21 +46,8 @@ Welcome
             @endforeach">
         <label for="email"> Your email</label>
         	<input class="form-control" type="email" name="email" id="email" placeholder="Enter Your E-Mail @ Example.com" value="{{ Request::old('email') }}" >
-          @if (count($errors) > 0)
-    
-        
-           @foreach ($errors->all() as $error)
-                 @if($error=="The email field is required."||$error== "The email must be a valid email address.")
-                  <div class="alert alert-danger">
-        <ul> 
-        {{$error}}
-         <ul>
-          </div>
-          @break;
-           @endif
-            @endforeach
-     
-    @endif
+
+
         	</div>
         	<div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
         <label for="first_name"> Your first name </label>
