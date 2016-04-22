@@ -9,7 +9,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      @if(Auth::user()!=null)
+
+      <a class="navbar-brand" href="{{route('dashboard')}}">Brand</a>
+    @endif
+      @if(Auth::user()==null)
+
+        <a class="navbar-brand" >Brand</a>
+      @endif
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,9 +24,9 @@
       <p class="navbar-text navbar-right">
 @if(Auth::user())
 
-Signed in as <a href="#" class=breadcrumb"> {{Auth::user()->first_name}}</a>
+Signed in as <a href="{{route('dashboard')}}" class=breadcrumb"> {{Auth::user()->first_name}}</a>
           <a  href="{{route('signout')}}"  class= "breadcrumb">Sign out</a>
-<a href="#" class= "breadcrumb">Acount</a>
+<a href="{{route('account')}}" class= "breadcrumb">Account</a>
 @endif
       </p>
 </div><!-- /.container-fluid -->

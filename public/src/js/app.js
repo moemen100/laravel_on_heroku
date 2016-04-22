@@ -6,10 +6,11 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
 
     postBodyElement = event.target.parentNode.parentNode.parentNode.parentNode.childNodes[1];
     var postBody = postBodyElement.textContent;
-    postId = event.target.parentNode.parentNode.dataset['postid'];
+    postId = event.target.parentNode.parentNode.parentNode.parentNode.dataset['postid'];
     $('#post-body').val(postBody);
     $('#edit-modal').modal();
 });
+
 $('#modal-save').on('click', function () {
     $.ajax({
             method: 'POST',

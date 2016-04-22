@@ -14,6 +14,8 @@
 
 Route::group(['middleware'=>['web']],function()
 {Route::get('/', function () {
+    if(Auth::user()!=null)
+        return redirect()->route('dashboard');
     return view('welcome');
 })->name('home');
 Route::get('/dashboard', ['uses'=>'PostController@getdashboard','as'=>'dashboard','middleware'=>'auth']);
@@ -22,13 +24,10 @@ Route::post('/signin',['uses'=>'usercontroller@postSignIn','as'=>'signin']);
     Route::get('/signout',['uses'=>'usercontroller@postSignOut','as'=>'signout']);
     Route::post('/createpost', ['uses' => 'PostController@postCreatePost', 'as' => 'post.create','middleware'=>'auth']);
     Route::get('/deletepost/{post_id}',['uses'=>'PostController@getDeletePost','as' => 'post.delete','middleware' => 'auth']);
-    Route::post('/edit', [
-        'uses' => 'PostController@postEditPost',
-        'as' => 'edit'
-    ]);
-    Route::post('/like', [
-        'uses' => 'PostController@postLikePost',
-        'as' => 'like'
-    ]);
-    
+    Route::post('/edit', ['uses' => 'PostController@postEditPost', 'as' => 'edit']);
+    Route::post('/like', ['uses' => 'PostController@postLikePost', 'as' => 'like']);
+    Route::get('/account', ['uses' => 'usercontroller@getAccount', 'as' => 'account','middleware' => 'auth']);
+    Route::post('/upateaccount', ['uses' => 'usercontroller@postSaveAccount', 'as' => 'account.save','middleware' => 'auth']);
+    Route::get('/userimage/{filename}', ['uses' => 'UserController@getUserImage', 'as' => 'account.image']);
+
 });
