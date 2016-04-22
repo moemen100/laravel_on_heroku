@@ -10,3 +10,14 @@ $('.post').find('.interaction').find('.edit').on('click', function (event) {
     $('#post-body').val(postBody);
     $('#edit-modal').modal();
 });
+$('#modal-save').on('click', function () {
+    $.ajax({
+            method: 'POST',
+            url: urlEdit,
+            data: {body: $('#post-body').val(), postId: postId, _token: token}
+        })
+        .done(function (msg) {
+            $(postBodyElement).text(msg['new_body']);
+            $('#edit-modal').modal('hide');
+        });
+});

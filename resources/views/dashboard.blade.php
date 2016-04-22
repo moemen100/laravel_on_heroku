@@ -6,12 +6,14 @@ Dummy wep
 @section('content')
 
 <div class="embed-responsive embed-responsive-16by9">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/z-1bdYTNWm8" frameborder="0" allowfullscreen>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/z-1bdYTNWm8" frameborder="0" allowfullscreen id="frame">
   </iframe>
 </div>
+<div class="col-md-6 col-md-offset-0">
+<h1> <span class="label label-primary"><Smal>Share With Your Comment </Smal></span></h1>
+    </div>
       <section class="row new-post">
-        <div class="col-md-6 col-md-offset-3">
-            <h1> <span class="label label-primary"><Smal>Share Your Comment </Smal></span></h1>
+        <div class="col-md-6 col-md-offset-1">
             <form action="{{route('post.create')}}" method="post">
                 <div class="form-group">
                     <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment"></textarea>
@@ -22,12 +24,16 @@ Dummy wep
         </div>
     </section>
     <section class="row posts">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-0">
             <h1> <span class="label label-info"><Smal>Comments Section</Smal></span></h1>
+            </div>
+        <div class="col-md-6 col-md-offset-1">
             @foreach($posts as $post )
-            <article class="post" data-postid="{{$post->id}}">
-               <h4>{{ $post->body }} </h4>
-                <div class="info">
+            <article class="post"  data-postid="{{$post->id}}">
+
+               <h4 > {{ $post->body }}</h4>
+
+                    <div class="info">
                     <span class="label label-primary"><Smal>Posted by {{ $post->user->first_name }} on {{ $post->created_at }}</Smal></span>
                 </div>
                 <div class="interaction">

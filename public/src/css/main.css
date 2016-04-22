@@ -7,6 +7,10 @@
 .posts header {
     margin-bottom: 20px;
 }
+.new-post header,
+.posts header {
+    margin-bottom: 20px;
+}
 
 .posts .post {
     padding-left: 10px;
