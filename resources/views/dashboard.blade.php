@@ -38,12 +38,13 @@ Dummy wep
                 </div>
                 <div class="interaction">
                     <ul class="pager">
-                        <li><a href="#"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Star</a></li>
-                      |  <li><a href="#" class="like">LIke</a></li>
+                        <li>  <a href="#" class="like"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  {{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
+                        <a href="#" class="like"> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post'  : 'Dislike' : 'Dislike'  }} </a>
+                      </li>
                         @if(Auth::user() == $post->user)
                             |
-                        <li>  <a href="#" class="edit">Edit</a> </li>|
-                       <li> <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="delete">Delete</a></li>
+                        <li>  <a href="#" class="edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> </li>|
+                       <li> <a href="{{route('post.delete',['post_id'=>$post->id])}}",class="delete">Delete<span class="glyphicon glyphicon-erase" aria-hidden="true"></span></a></li>
 
                     @endif
                     </ul>

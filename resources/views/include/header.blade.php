@@ -24,9 +24,9 @@
       <p class="navbar-text navbar-right">
 @if(Auth::user())
 
-Signed in as <a href="{{route('dashboard')}}" class=breadcrumb"> {{Auth::user()->first_name}}</a>
-          <a  href="{{route('signout')}}"  class= "breadcrumb">Sign out</a>
-<a href="{{route('account')}}" class= "breadcrumb">Account</a>
+Signed in as <a href="{{route('dashboard')}}" class=breadcrumb"> {{Auth::user()->first_name}}  <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></a>
+          <a  href="{{route('signout')}}"  class= "breadcrumb">Sign out  <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a>
+<a href="{{route('account')}}" class= "breadcrumb">Account  <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span></a>
 @endif
       </p>
 </div><!-- /.container-fluid -->

@@ -9,10 +9,13 @@
 namespace App\Http\Controllers;
 
 
+use App\like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Post;
+use SebastianBergmann\Environment\Console;
+
 class PostController extends Controller
 {
     public function getdashboard()
@@ -62,6 +65,7 @@ public function postCreatePost (Request $request)
         $is_like = $request['isLike'] === 'true';
         $update = false;
         $post = Post::find($post_id);
+
         if (!$post) {
             return null;
         }
@@ -75,7 +79,7 @@ public function postCreatePost (Request $request)
                 return null;
             }
         } else {
-            $like = new Like();
+            $like = new like();
         }
         $like->like = $is_like;
         $like->user_id = $user->id;
