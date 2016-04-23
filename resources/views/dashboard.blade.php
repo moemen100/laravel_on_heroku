@@ -5,10 +5,7 @@ Dummy wep
 
 @section('content')
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/z-1bdYTNWm8" frameborder="0" allowfullscreen id="frame">
-  </iframe>
-</div>
+
 <div class="col-md-6 col-md-offset-0">
 <h1> <span class="label label-primary"><Smal>Share With Your Comment </Smal></span></h1>
     </div>
@@ -16,7 +13,7 @@ Dummy wep
         <div class="col-md-6 col-md-offset-1">
             <form action="{{route('post.create')}}" method="post">
                 <div class="form-group">
-                    <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment"></textarea>
+                    <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment" rows="5"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">comment</button>
                 <input type="hidden" value="{{ Session::token() }}" name="_token">
@@ -34,17 +31,24 @@ Dummy wep
                <h4 > {{ $post->body }}</h4>
 
                     <div class="info">
+
                     <span class="label label-primary"><Smal>Posted by {{ $post->user->first_name }} on {{ $post->created_at }}</Smal></span>
+                  </div>
+                <div>
+                    <span class="label label-success"><Smal> {{ count($post->likes->where('like',true)->pluck('like') ) }} User Like this   </Smal> </span>
+                    <span class="label label-danger"><Smal>{{ count($post->likes->where('like',false)->pluck('like') ) }} User Don't Like this</Smal> </span>
                 </div>
                 <div class="interaction">
                     <ul class="pager">
-                        <li>  <a href="#" class="like"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  {{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
-                        <a href="#" class="like"> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post'  : 'Dislike' : 'Dislike'  }} </a>
-                      </li>
+                        <li>  <a  href="#" class="glyphicon glyphicon-star" >{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'Remove Like':'Like': 'Like'}}</a>  |
+
+                            <a href="#" class="glyphicon glyphicon-fire" >{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'Remove dislike'  : 'Dislike' : 'Dislike'  }} </a>
+                     </li>
+
                         @if(Auth::user() == $post->user)
                             |
-                        <li>  <a href="#" class="edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> </li>|
-                       <li> <a href="{{route('post.delete',['post_id'=>$post->id])}}",class="delete">Delete<span class="glyphicon glyphicon-erase" aria-hidden="true"></span></a></li>
+                        <li>  <a href="#" class="glyphicon glyphicon-edit"> Edit</span> </a></li>
+                      | <li> <a class="glyphicon glyphicon-erase"  href="{{route('post.delete',['post_id'=>$post->id])}}"> Delete</a></li>
 
                     @endif
                     </ul>

@@ -11,11 +11,11 @@
       </button>
       @if(Auth::user()!=null)
 
-      <a class="navbar-brand" href="{{route('dashboard')}}">Brand</a>
+      <a class="navbar-brand" href="{{route('dashboard')}}">Dummy Wep</a>
     @endif
       @if(Auth::user()==null)
 
-        <a class="navbar-brand" >Brand</a>
+        <a class="navbar-brand" >Dummy Wep</a>
       @endif
     </div>
 
