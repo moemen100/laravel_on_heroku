@@ -24,12 +24,12 @@ Dummy wep
         <div class="col-md-6 col-md-offset-0">
             <h1> <span class="label label-info"><Smal>Comments Section</Smal></span></h1>
             </div>
-        <div class="col-md-7 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
                 @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="thumbnail" >
                                 <img class="img-circle" src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}">
                             </div>
@@ -39,7 +39,7 @@ Dummy wep
                 @endif
                     @if (!Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="thumbnail">
                                 <img class="img-responsive " src="{{ route('account.image', ['filename' => 'mo-4.jpg']) }}">
                             </div>
