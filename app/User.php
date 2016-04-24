@@ -8,6 +8,7 @@ class user extends Model  implements Authenticatable
 {
     use \ Illuminate\Auth\Authenticatable;
 
+
     /**
      * Get the name of the unique identifier for the user.
      *

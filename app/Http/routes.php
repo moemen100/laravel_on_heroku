@@ -16,8 +16,12 @@ Route::group(['middleware'=>['web']],function()
 {Route::get('/', function () {
     if(Auth::user()!=null)
         return redirect()->route('dashboard');
+
     return view('welcome');
 })->name('home');
+    Route::get('/login', function () {
+        if(Auth::user()==null)
+            return redirect()->route('home');});
 Route::get('/dashboard', ['uses'=>'PostController@getdashboard','as'=>'dashboard','middleware'=>'auth']);
 Route::post('/signup',['uses'=>'usercontroller@postSignUp','as'=>'signup']);
 Route::post('/signin',['uses'=>'usercontroller@postSignIn','as'=>'signin']);
