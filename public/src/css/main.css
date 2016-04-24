@@ -26,4 +26,16 @@
 .thumbnail {
     border: 0 none;
     box-shadow: none;
+    width: 130px;
+    height: 140px;
+}
+.form-group {
+    color: #5bc0de;
+}
+.form-control {
+
+    color: #000000;
+    font-size: x-large;
+    font-family: "Edwardian Script ITC"
+
 }
