@@ -24,7 +24,7 @@ Dummy wep
         <div class="col-md-6 col-md-offset-0">
             <h1> <span class="label label-info"><Smal>Comments Section</Smal></span></h1>
             </div>
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-7 col-md-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
                 @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
