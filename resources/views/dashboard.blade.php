@@ -31,7 +31,7 @@ Dummy wep
 
                         <div class="col-md-4">
                             <div class="thumbnail" >
-                                <img class="img-circle " src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}">
+                                <img class="img-circle" src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}">
                             </div>
                         </div>
 

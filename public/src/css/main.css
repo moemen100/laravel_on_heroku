@@ -23,3 +23,7 @@
     font-style: italic;
 }
 
+.thumbnail {
+    border: 0 none;
+    box-shadow: none;
+}
