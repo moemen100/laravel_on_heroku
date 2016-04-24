@@ -37,7 +37,7 @@ Dummy wep
                     @if (!Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
                         <div class="col-md-4">
-                            <img src="{{ route('account.image', ['filename' => 'mo-4.jbg']) }}" alt="" class="img-responsive">
+                            <img src="{{ route('account.image', ['filename' => 'mo-4.PNG']) }}" alt="" class="img-responsive">
                         </div>
 
                     @endif
