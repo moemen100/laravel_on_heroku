@@ -27,7 +27,20 @@ Dummy wep
         <div class="col-md-6 col-md-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
+                @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
+                        <div class="col-md-2">
+                            <img src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}" alt="" class="img-responsive">
+                        </div>
+
+                @endif
+                    @if (!Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
+
+                        <div class="col-md-4">
+                            <img src="{{ route('account.image', ['filename' => 'Basic.PNG']) }}" alt="" class="img-responsive">
+                        </div>
+
+                    @endif
                <h4 > {{ $post->body }}</h4>
 
                     <div class="info">
@@ -35,8 +48,8 @@ Dummy wep
                     <span class="label label-primary"><Smal>Posted by {{ $post->user->first_name }} on {{ $post->created_at }}</Smal></span>
                   </div>
                 <div>
-                    <span class="label label-success"><Smal> {{ count($post->likes->where('like',true)->pluck('like') ) }} User Like this   </Smal> </span>
-                    <span class="label label-danger"><Smal>{{ count($post->likes->where('like',false)->pluck('like') ) }} User Don't Like this</Smal> </span>
+                    <span class="label label-success"><Smal> {{ count($post->likes->where('like',true)->pluck('like') ) }} Other User Like this   </Smal> </span>
+                    <span class="label label-danger"><Smal>{{ count($post->likes->where('like',false)->pluck('like') ) }} Other User Don't Like this</Smal> </span>
                 </div>
                 <div class="interaction">
                     <ul class="pager">
