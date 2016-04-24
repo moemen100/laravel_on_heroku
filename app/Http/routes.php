@@ -28,6 +28,6 @@ Route::post('/signin',['uses'=>'usercontroller@postSignIn','as'=>'signin']);
     Route::post('/like', ['uses' => 'PostController@postLikePost', 'as' => 'like']);
     Route::get('/account', ['uses' => 'usercontroller@getAccount', 'as' => 'account','middleware' => 'auth']);
     Route::post('/upateaccount', ['uses' => 'usercontroller@postSaveAccount', 'as' => 'account.save','middleware' => 'auth']);
-    Route::get('/userimage/{filename}', ['uses' => 'UserController@getUserImage', 'as' => 'account.image']);
+    Route::get('/userimage/{filename}', ['uses' => 'usercontroller@getUserImage', 'as' => 'account.image']);
 
 });
