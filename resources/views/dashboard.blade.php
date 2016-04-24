@@ -24,20 +24,25 @@ Dummy wep
         <div class="col-md-6 col-md-offset-0">
             <h1> <span class="label label-info"><Smal>Comments Section</Smal></span></h1>
             </div>
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-7 col-md-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
                 @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
-                        <div class="col-md-2">
-                            <img src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}" alt="" class="img-responsive">
+                        <div class="col-md-4">
+                            <div class="thumbnail" >
+                                <img class="img-circle " src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}">
+                            </div>
                         </div>
+
 
                 @endif
                     @if (!Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
                         <div class="col-md-4">
-                            <img src="{{ route('account.image', ['filename' => 'mo-4.jbg']) }}" alt="" class="img-circle">
+                            <div class="thumbnail">
+                                <img class="img-responsive " src="{{ route('account.image', ['filename' => 'mo-4.jpg']) }}">
+                            </div>
                         </div>
 
                     @endif
@@ -53,14 +58,14 @@ Dummy wep
                 </div>
                 <div class="interaction">
                     <ul class="pager">
-                        <li>  <a  href="#" class="glyphicon glyphicon-star" >{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'Remove Like':'Like': 'Like'}}</a>  |
+                        <li>  <a  href="#" class="glyphicon glyphicon-star" >{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'Remove Like':'Like':'Like'}}</a>  |
 
                             <a href="#" class="glyphicon glyphicon-fire" >{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'Remove dislike'  : 'Dislike' : 'Dislike'  }} </a>
                      </li>
 
                         @if(Auth::user() == $post->user)
                             |
-                        <li>  <a href="#" class="glyphicon glyphicon-edit"> Edit</span> </a></li>
+                        <li> <a href="#" class="glyphicon glyphicon-edit"> Edit</span> </a>
                       | <li> <a class="glyphicon glyphicon-erase"  href="{{route('post.delete',['post_id'=>$post->id])}}"> Delete</a></li>
 
                     @endif
