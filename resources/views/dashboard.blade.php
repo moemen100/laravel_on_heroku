@@ -46,7 +46,7 @@ Dummy wep
                         </div>
 
                     @endif
-               <h4 > {{ $post->body }}</h4>
+               <h2 > {!!$post->body !!}</h2>
 
                     <div class="info">
 
