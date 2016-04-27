@@ -23,5 +23,9 @@ class user extends Model  implements Authenticatable
     {
         return $this->hasMany('App\like');
     }
+    public function comments()
+    {
+        return $this->hasMany('App\comment');
+    }
 
 }

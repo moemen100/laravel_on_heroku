@@ -9,11 +9,15 @@
 namespace App\Http\Controllers;
 
 
+use App\comment;
 use App\like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Post;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\Environment\Console;
 
 class PostController extends Controller
@@ -23,8 +27,13 @@ class PostController extends Controller
         
         return view('dashboard',['posts'=>$posts]);
     }
+    public function getcommentsection($post_id)
+    {$posts=Post::find($post_id);
+        return view('commentsection',['post_id'=>$post_id,'post'=>$posts]);
+    }
 public function postCreatePost (Request $request)
-{
+
+{   if($request['multimedia']==null)
     $this->validate($request, [
         'body' => 'required|max:1000'
     ]);
@@ -34,7 +43,32 @@ public function postCreatePost (Request $request)
     if ($request->user()->posts()->save($post)) {
         $message = 'Post successfully created!';
     }
-    
+    if($request['multimedia']) {
+
+        $user = Auth::user();
+        $file = $request->file('multimedia');
+        $mime = $request->file('multimedia')->getMimeType();
+
+
+        // $extension = $request->file('multimedia')->getClientOriginalExtension();
+        if(strstr($mime, "video/")){
+            $filename = $user->first_name . '-' . $post->id .'.'.'video';
+        }else if(strstr($mime, "image/")){
+            $filename = $user->first_name . '-' . $post->id .'.'.'image';
+        }
+        else if(strstr($mime, "audio/")){
+            $filename = $user->first_name . '-' . $post->id .'.'.'audio';
+        }
+        else
+        {return redirect()->route('dashboard')->with(['message' => $message]);}
+
+        if ($file) {
+            Storage::disk('local')->put($filename, File::get($file));
+        }
+
+        return redirect()->route('dashboard')->with(['message' => $message]);;
+
+    }
     return redirect()->route('dashboard')->with(['message' => $message]);
 }
     public function getDeletePost($post_id)
@@ -45,6 +79,21 @@ public function postCreatePost (Request $request)
         }
         $post->delete();
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!']);
+    }
+    public function postcommentPost (Request $request,$post_id)
+    {
+        $this->validate($request, [
+            'body' => 'required|max:1000'
+        ]);
+        $user = Auth::user();
+        $comment = new comment();
+        $comment->body=$request['body'];
+        $comment->post_id=$post_id;
+        $comment->user_id=$user->id;
+        $comment->save();
+
+
+        return redirect()->route('commentsection',$post_id);
     }
     public function postEditPost(Request $request)
     {

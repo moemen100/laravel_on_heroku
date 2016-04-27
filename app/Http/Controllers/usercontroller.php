@@ -85,5 +85,10 @@ return redirect()->route('dashboard');
 		$file = Storage::disk('local')->get($filename);
 		return new Response($file, 200);
 	}
+	public function getVedio($filename)
+	{
+		$file = Storage::disk('local')->get($filename);
+		return new Response($file, 200);
+	}
 
 }

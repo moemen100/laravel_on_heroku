@@ -43,3 +43,16 @@ h2{
     font-family: "Edwardian Script ITC"
 
 }
+.list-group-item{
+background: #dbf3ed;
+border: none;
+
+}
+
+#multimedia{
+    font-size:small;
+    border-top: none;
+}
+#del{
+    border-color: #acacac;
+}
