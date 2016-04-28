@@ -13,7 +13,7 @@ Dummy wep
         <div class="col-md-6 col-md-offset-4">
             <form action="{{route('post.create')}}" method="post" enctype="multipart/form-data" >
                 <div class="form-group">
-                    <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment" rows="5" ></textarea>
+                    <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment " rows="5" ></textarea>
                     <input type="file" name="multimedia" class="form-control" id="multimedia">
                     <button type="submit" class="btn btn-primary">Share Post</button>
                 </div>

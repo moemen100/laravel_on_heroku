@@ -10,7 +10,8 @@
         </div>
         <div class="col-md-7 col-md-offset-1">
                 <article class="post"  data-postid="{{$post->id}}">
-
+                 <h1></h1>
+                    
    <h2>{{$post->body}}</h2>
     @if (Storage::disk('local')->has($post->user->first_name . '-' . $post_id . '.image'))
         <div class="row">
