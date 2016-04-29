@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => env('AKIAI33UDHN3GHUOFD2Q'),
-            'secret' => env('FRxsRguqSnOQ63LCUxC53C+jbUwbYYPdPhDI8JHt'),
-            'region' => env('us-east-1'),
-            'bucket' => env('dummywep'),
+            'key' => 'AKIAI33UDHN3GHUOFD2Q',
+            'secret' => 'FRxsRguqSnOQ63LCUxC53C+jbUwbYYPdPhDI8JHt',
+            'region' => 'us-east-1',
+            'bucket' => 'dummywep',
         ],
 
     ],
