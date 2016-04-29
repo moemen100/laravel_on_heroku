@@ -63,7 +63,7 @@ public function postCreatePost (Request $request)
         {return redirect()->route('dashboard')->with(['message' => $message]);}
 
         if ($file) {
-            Storage::disk('local')->put($filename, File::get($file));
+            Storage::disk('s3')->put($filename, File::get($file));
         }
 
         return redirect()->route('dashboard')->with(['message' => $message]);;
@@ -74,7 +74,7 @@ public function postCreatePost (Request $request)
     public function getDeletePost($post_id)
     {
         $post = Post::where('id', $post_id)->first();
-        $comment=comment::where('post_id', $post_id)->all();
+        $comment=comment::where('post_id', $post_id)->All();
         if (Auth::user() != $post->user) {
             return redirect()->back();
         }
