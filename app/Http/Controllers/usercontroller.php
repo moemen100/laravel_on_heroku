@@ -66,13 +66,13 @@ return redirect()->route('dashboard');
 		$filename = $request['first_name'] . '-' . $user->id . '.jpg';
 		$old_filename = $old_name . '-' . $user->id . '.jpg';
 		$update = false;
-		if (Storage::disk('local')->has($old_filename)) {
-			$old_file = Storage::disk('local')->get($old_filename);
-			Storage::disk('local')->put($filename, $old_file);
+		if (Storage::disk('s3')->has($old_filename)) {
+			$old_file = Storage::disk('s3')->get($old_filename);
+			Storage::disk('s3')->put($filename, $old_file);
 			$update = true;
 		}
 		if ($file) {
-			Storage::disk('local')->put($filename, File::get($file));
+			Storage::disk('s3')->put($filename, File::get($file));
 		}
 		if ($update && $old_filename !== $filename) {
 			Storage::delete($old_filename);
@@ -82,12 +82,12 @@ return redirect()->route('dashboard');
 
 	public function getUserImage($filename)
 	{
-		$file = Storage::disk('local')->get($filename);
+		$file = Storage::disk('s3')->get($filename);
 		return new Response($file, 200);
 	}
 	public function getVedio($filename)
 	{
-		$file = Storage::disk('local')->get($filename);
+		$file = Storage::disk('s3')->get($filename);
 		return new Response($file, 200);
 	}
 

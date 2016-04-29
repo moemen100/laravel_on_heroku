@@ -74,10 +74,12 @@ public function postCreatePost (Request $request)
     public function getDeletePost($post_id)
     {
         $post = Post::where('id', $post_id)->first();
+        $comment=comment::where('post_id', $post_id)->all();
         if (Auth::user() != $post->user) {
             return redirect()->back();
         }
         $post->delete();
+        $comment->delete();
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!']);
     }
     public function postcommentPost (Request $request,$post_id)
