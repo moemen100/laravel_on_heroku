@@ -13,7 +13,7 @@
                  <h1></h1>
 
    <h2>{{$post->body}}</h2>
-    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post_id . '.image'))
+    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post_id . '.image'))
         <div class="row">
             <div class="col-md-10">
 
@@ -22,7 +22,7 @@
             </div>
         </div>
     @endif
-    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post_id . '.video'))
+    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post_id . '.video'))
         <div class="row">
             <div class="col-md-10">
 
@@ -31,7 +31,7 @@
             </div>
         </div>
     @endif
-    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post_id . '.audio'))
+    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post_id . '.audio'))
         <div class="row">
             <div class="col-md-10">
 

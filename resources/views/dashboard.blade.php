@@ -28,7 +28,7 @@ Dummy wep
         <div class="col-md-7 col-md-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
-                @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
+                @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
                         <div class="col-md-3">
                             <div class="thumbnail" >
@@ -38,7 +38,7 @@ Dummy wep
 
 
                 @endif
-                    @if (!Storage::disk('local')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
+                    @if (!Storage::disk('s3')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
                         <div class="col-md-3">
                             <div class="thumbnail">
@@ -48,7 +48,7 @@ Dummy wep
 
                     @endif
                <h2 > {!!$post->body !!}</h2>
-                    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->id . '.image'))
+                    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.image'))
                         <div class="row">
                             <div class="col-md-5">
 
@@ -58,7 +58,7 @@ Dummy wep
                         </div>
 
                     @endif
-                    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->id . '.video'))
+                    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.video'))
                         <div class="row">
                             <div class="col-md-5">
 
@@ -67,7 +67,7 @@ Dummy wep
                             </div>
                         </div>
                     @endif
-                    @if (Storage::disk('local')->has($post->user->first_name . '-' . $post->id . '.audio'))
+                    @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.audio'))
                         <div class="row">
                             <div class="col-md-5">
 

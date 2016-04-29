@@ -74,7 +74,7 @@ public function postCreatePost (Request $request)
     public function getDeletePost($post_id)
     {
         $post = Post::where('id', $post_id)->first();
-        $comment=comment::where('post_id', $post_id)->All();
+        $comment=comment::where('post_id', $post_id);
         if (Auth::user() != $post->user) {
             return redirect()->back();
         }
