@@ -19,6 +19,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\Environment\Console;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class PostController extends Controller
 {
@@ -47,21 +48,22 @@ public function postCreatePost (Request $request)
 
         $user = Auth::user();
         $file = $request->file('multimedia');
-        $mime = $request->file('multimedia')->getMimeType();
-
-
-        // $extension = $request->file('multimedia')->getClientOriginalExtension();
-        if(strstr($mime, "video/")){
-            $filename = $user->first_name . '-' . $post->id .'.'.'video';
-        }else if(strstr($mime, "image/")){
-            $filename = $user->first_name . '-' . $post->id .'.'.'image';
+        $extension = $request->file('multimedia')->getClientOriginalExtension();
+       if($extension=="mp3"||$extension=="wav")
+       {$filename = $user->first_name . '-' . $post->id .'.'.'audio';}
+        else {
+            $mime = $request->file('multimedia')->getMimeType();
+            // $extension = $request->file('multimedia')->getClientOriginalExtension();
+            if (strstr($mime, "video/")) {
+                $filename = $user->first_name . '-' . $post->id . '.' . 'video';
+            } else if (strstr($mime, "image/")) {
+                $filename = $user->first_name . '-' . $post->id . '.' . 'image';
+            } else if (strstr($mime, "audio/")) {
+                $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
+            } else {
+                return redirect()->route('dashboard')->with(['message' => $message]);
+            }
         }
-        else if(strstr($mime, "audio/")){
-            $filename = $user->first_name . '-' . $post->id .'.'.'audio';
-        }
-        else
-        {return redirect()->route('dashboard')->with(['message' => $message]);}
-
         if ($file) {
             Storage::disk('s3')->put($filename, File::get($file));
         }
