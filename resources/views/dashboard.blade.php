@@ -6,11 +6,11 @@ Dummy wep
 @section('content')
 
 
-<div class="col-md-6 col-md-offset-0">
+<div class="col-sm-6 col-sm-offset-0">
 <h1> <span class="label label-primary"><Smal>Share Your Post </Smal></span></h1>
     </div>
       <section class="row new-post">
-        <div class="col-md-6 col-md-offset-4">
+        <div class="col-sm-6 col-sm-offset-4">
             <form action="{{route('post.create')}}" method="post" enctype="multipart/form-data" >
                 <div class="form-group">
                     <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your comment " rows="5" ></textarea>
@@ -22,15 +22,15 @@ Dummy wep
         </div>
     </section>
     <section class="row posts">
-        <div class="col-md-6 col-md-offset-0">
+        <div class="col-sm-6 col-sm-offset-0">
             <h1> <span class="label label-info"><Smal>Posts Section</Smal></span></h1>
             </div>
-        <div class="col-md-7 col-md-offset-1">
+        <div class="col-sm-7 col-sm-offset-1">
             @foreach($posts as $post )
             <article class="post"  data-postid="{{$post->id}}">
                 @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
                             <div class="thumbnail" >
                                 <img class="img-circle" src="{{ route('account.image', ['filename' => $post->user->first_name . '-' . $post->user->id . '.jpg']) }}">
                             </div>
@@ -40,7 +40,7 @@ Dummy wep
                 @endif
                     @if (!Storage::disk('s3')->has($post->user->first_name . '-' . $post->user->id . '.jpg'))
 
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
                             <div class="thumbnail">
                                 <img class="img-responsive " src="{{ route('account.image', ['filename' => 'mo-4.jpg']) }}">
                             </div>
@@ -50,7 +50,7 @@ Dummy wep
                <h2 > {!!$post->body !!}</h2>
                     @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.image'))
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-sm-5">
 
                                 <img class="img-responsive" src="{{ route('upload.vedio', ['filename' => $post->user->first_name . '-' . $post->id . '.image']) }}" id="uploaded">
 
@@ -60,7 +60,7 @@ Dummy wep
                     @endif
                     @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.video'))
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-sm-5">
 
                                 <video  src="{{ route('upload.vedio', ['filename' => $post->user->first_name . '-' . $post->id . '.video']) }}" id="uploaded" controls="controls">
                                 </video>
@@ -69,7 +69,7 @@ Dummy wep
                     @endif
                     @if (Storage::disk('s3')->has($post->user->first_name . '-' . $post->id . '.audio'))
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-sm-5">
 
                                 <audio  src="{{ route('upload.vedio', ['filename' => $post->user->first_name . '-' . $post->id . '.audio']) }}" id="uploaded" controls="controls">
                                 </audio>
@@ -102,7 +102,7 @@ Dummy wep
 
                     </ul>
 
-                    <div class="col-md-12 col-md-offset-0">
+                    <div class="col-sm-12 col-md-offset-0">
                         <h4> <span class="label label-info"><Smal>Comments Section</Smal></span></h4>
                         <ul class="list-group-item ">
                     @foreach($post->comments as $comment )
