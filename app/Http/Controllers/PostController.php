@@ -48,12 +48,11 @@ public function postCreatePost (Request $request)
 
         $user = Auth::user();
         $file = $request->file('multimedia');
-        $extension = $request->file('multimedia')->getClientOriginalExtension();
-       if($extension=="mp3"||$extension=="wav")
-       {$filename = $user->first_name . '-' . $post->id .'.'.'audio';}
-        else {
+        //$extension = $request->file('multimedia')->getClientOriginalExtension();
+       //if($extension=="mp3"||$extension=="wav")
+      // {$filename = $user->first_name . '-' . $post->id .'.'.'audio';}
+       // else {
             $mime = $request->file('multimedia')->getMimeType();
-            // $extension = $request->file('multimedia')->getClientOriginalExtension();
             if (strstr($mime, "video/")) {
                 $filename = $user->first_name . '-' . $post->id . '.' . 'video';
             } else if (strstr($mime, "image/")) {
@@ -63,7 +62,7 @@ public function postCreatePost (Request $request)
             } else {
                 return redirect()->route('dashboard')->with(['message' => $message]);
             }
-        }
+       // }
         if ($file) {
             Storage::disk('s3')->put($filename, File::get($file));
         }
