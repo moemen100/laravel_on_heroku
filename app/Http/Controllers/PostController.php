@@ -49,7 +49,7 @@ public function postCreatePost (Request $request)
         $user = Auth::user();
         $file = $request->file('multimedia');
         $extension = $file->getExtension();
-       if($extension=="mp3"||$extension=="wav")
+       if($extension==".mp3"||$extension==".wav")
            $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
         else {
 
