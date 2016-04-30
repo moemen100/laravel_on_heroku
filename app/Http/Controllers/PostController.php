@@ -48,8 +48,8 @@ public function postCreatePost (Request $request)
 
         $user = Auth::user();
         $file = $request->file('multimedia');
-        $extension = $file->getExtension();
-       if($extension==".mp3"||$extension==".wav")
+        $extension = $file->getClientOriginalExtension();
+       if($extension=='.mp3'||$extension==".mp3"||$extension=="mp3"||$extension=='.mp3')
            $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
         else {
 
