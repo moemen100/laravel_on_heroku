@@ -24,59 +24,65 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
 class PostController extends Controller
 {
     public function getdashboard()
-    {$posts=Post::orderBy('created_at','desc')->get();
-        
-        return view('dashboard',['posts'=>$posts]);
+    {
+        $posts = Post::orderBy('created_at', 'desc')->get();
+
+        return view('dashboard', ['posts' => $posts]);
     }
+
     public function getcommentsection($post_id)
-    {$posts=Post::find($post_id);
-        return view('commentsection',['post_id'=>$post_id,'post'=>$posts]);
+    {
+        $posts = Post::find($post_id);
+        return view('commentsection', ['post_id' => $post_id, 'post' => $posts]);
     }
-public function postCreatePost (Request $request)
 
-{   if($request['multimedia']==null)
-    $this->validate($request, [
-        'body' => 'required|max:1000'
-    ]);
-    $post = new Post();
-    $post->body = $request['body'];
-    $message = 'There was an error';
-    if ($request->user()->posts()->save($post)) {
-        $message = 'Post successfully created!';
-    }
-    if($request['multimedia']) {
+    public function postCreatePost(Request $request)
 
-        $user = Auth::user();
-        $file = $request->file('multimedia');
-        $extension = $file->getClientOriginalExtension();
-       if($extension=="mp3"||$extension=='.mp3')
-           $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
-        else {
+    {
+        if ($request['multimedia'] == null)
+            $this->validate($request, [
+                'body' => 'required|max:1000'
+            ]);
+        $post = new Post();
+        $post->body = $request['body'];
+        $message = 'There was an error';
+        if ($request->user()->posts()->save($post)) {
+            $message = 'Post successfully created!';
+        }
+        if ($request['multimedia']) {
 
-            $mime = $request->file('multimedia')->getMimeType();
-            if (strstr($mime, "video/")) {
-                $filename = $user->first_name . '-' . $post->id . '.' . 'video';
-            } else if (strstr($mime, "image/")) {
-                $filename = $user->first_name . '-' . $post->id . '.' . 'image';
-            } else if (strstr($mime, "audio/")) {
+            $user = Auth::user();
+            $file = $request->file('multimedia');
+            $extension = $file->getClientOriginalExtension();
+            if ($extension == "mp3" || $extension == '.mp3')
                 $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
-            } else {
-                return redirect()->route('dashboard')->with(['message' => $message]);
+            else {
+
+                $mime = $request->file('multimedia')->getMimeType();
+                if (strstr($mime, "video/")) {
+                    $filename = $user->first_name . '-' . $post->id . '.' . 'video';
+                } else if (strstr($mime, "image/")) {
+                    $filename = $user->first_name . '-' . $post->id . '.' . 'image';
+                } else if (strstr($mime, "audio/")) {
+                    $filename = $user->first_name . '-' . $post->id . '.' . 'audio';
+                } else {
+                    return redirect()->route('dashboard')->with(['message' => $message]);
+                }
             }
-        }
-        if ($file) {
-            Storage::disk('s3')->put($filename, File::get($file));
-        }
+            if ($file) {
+                Storage::disk('s3')->put($filename, File::get($file));
+            }
 
-        return redirect()->route('dashboard')->with(['message' => $message]);;
+            return redirect()->route('dashboard')->with(['message' => $message]);;
 
+        }
+        return redirect()->route('dashboard')->with(['message' => $message]);
     }
-    return redirect()->route('dashboard')->with(['message' => $message]);
-}
+
     public function getDeletePost($post_id)
     {
         $post = Post::where('id', $post_id)->first();
-        $comment=comment::where('post_id', $post_id);
+        $comment = comment::where('post_id', $post_id);
         if (Auth::user() != $post->user) {
             return redirect()->back();
         }
@@ -84,21 +90,23 @@ public function postCreatePost (Request $request)
         $comment->delete();
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!']);
     }
-    public function postcommentPost (Request $request,$post_id)
+
+    public function postcommentPost(Request $request, $post_id)
     {
         $this->validate($request, [
             'body' => 'required|max:1000'
         ]);
         $user = Auth::user();
         $comment = new comment();
-        $comment->body=$request['body'];
-        $comment->post_id=$post_id;
-        $comment->user_id=$user->id;
+        $comment->body = $request['body'];
+        $comment->post_id = $post_id;
+        $comment->user_id = $user->id;
         $comment->save();
 
 
-        return redirect()->route('commentsection',$post_id);
+        return redirect()->route('commentsection', $post_id);
     }
+
     public function postEditPost(Request $request)
     {
         $this->validate($request, [
@@ -112,6 +120,7 @@ public function postCreatePost (Request $request)
         $post->update();
         return response()->json(['new_body' => $post->body], 200);
     }
+
     public function postLikePost(Request $request)
     {
         $post_id = $request['postId'];

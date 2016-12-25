@@ -155,7 +155,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Aws\Laravel\AwsServiceProvider::class
+        Aws\Laravel\AwsServiceProvider::class,
+        Vinkla\Pusher\PusherServiceProvider::class
     ],
 
     /*
@@ -202,6 +203,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'AWS' => Aws\Laravel\AwsFacade::class,
+        'LaravelPusher'=> Vinkla\Pusher\Facades\Pusher::class,
+
     ],
 
 ];

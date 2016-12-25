@@ -16,9 +16,10 @@ class Post extends Model
     {
         return $this->hasMany('App\like');
     }
+
     public function comments()
     {
         return $this->hasMany('App\comment');
     }
-    
+
 }

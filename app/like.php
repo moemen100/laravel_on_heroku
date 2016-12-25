@@ -15,6 +15,7 @@ class like extends Model
     {
         return $this->belongsTo('App\Post');
     }
+
     public function comments()
     {
         return $this->belongsTo('App\comment');
